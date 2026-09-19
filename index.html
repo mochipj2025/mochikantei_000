@@ -4,14 +4,14 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>総合鑑定書 PromptMaker</title>
 <style>
-:root{--bg:#07182c;--panel:#10253d;--gold:#d7b66d;--ivory:#f7f0df;--muted:#b8c2cf}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;background:radial-gradient(circle at 70% 0,#183a5b 0,#07182c 48%,#04101e 100%);color:var(--ivory);min-height:100vh}.wrap{max-width:1080px;margin:auto;padding:40px 20px 64px}header{text-align:center;margin-bottom:28px}h1{font-family:serif;font-size:clamp(30px,5vw,52px);margin:0;color:#fff}header p{color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.card{background:rgba(16,37,61,.86);border:1px solid rgba(215,182,109,.45);border-radius:18px;padding:22px;box-shadow:0 18px 50px #0005}h2{font-size:18px;color:var(--gold);margin-top:0}label{display:block;margin:14px 0 6px;font-size:14px}input,select,textarea{width:100%;border:1px solid #ffffff26;background:#07182c;color:#fff;border-radius:10px;padding:12px;font:inherit}textarea{min-height:410px;resize:vertical;line-height:1.55}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}button{border:0;border-radius:999px;padding:12px 18px;font-weight:700;cursor:pointer}.primary{background:var(--gold);color:#142033}.secondary{background:#fff1;color:#fff;border:1px solid #ffffff38}.note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:14px}.badge{display:inline-block;border:1px solid var(--gold);color:var(--gold);border-radius:99px;padding:4px 9px;font-size:12px;margin-bottom:10px}@media(max-width:780px){.grid{grid-template-columns:1fr}.wrap{padding-top:24px}.row{grid-template-columns:1fr}textarea{min-height:360px}}
+:root{--bg:#07182c;--panel:#10253d;--gold:#d7b66d;--ivory:#f7f0df;--muted:#b8c2cf}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;background:radial-gradient(circle at 70% 0,#183a5b 0,#07182c 48%,#04101e 100%);color:var(--ivory);min-height:100vh}.wrap{max-width:1080px;margin:auto;padding:40px 20px 64px}header{text-align:center;margin-bottom:28px}h1{font-family:serif;font-size:clamp(30px,5vw,52px);margin:0;color:#fff}header p{color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.card{background:rgba(16,37,61,.86);border:1px solid rgba(215,182,109,.45);border-radius:18px;padding:22px;box-shadow:0 18px 50px #0005}h2{font-size:18px;color:var(--gold);margin-top:0}label{display:block;margin:14px 0 6px;font-size:14px}input,select,textarea{width:100%;border:1px solid #ffffff26;background:#07182c;color:#fff;border-radius:10px;padding:12px;font:inherit}textarea{min-height:410px;resize:vertical;line-height:1.55}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.birth-row{display:grid;grid-template-columns:1.4fr auto .8fr auto .8fr;gap:8px;align-items:center}.birth-sep{font-weight:800;color:var(--gold);font-size:20px;text-align:center}.birth-row input{text-align:center}@media(max-width:480px){.birth-row{grid-template-columns:1.35fr auto .8fr auto .8fr;gap:5px}.birth-row input{padding:12px 7px}}.actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}button{border:0;border-radius:999px;padding:12px 18px;font-weight:700;cursor:pointer}.primary{background:var(--gold);color:#142033}.secondary{background:#fff1;color:#fff;border:1px solid #ffffff38}.note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:14px}.badge{display:inline-block;border:1px solid var(--gold);color:var(--gold);border-radius:99px;padding:4px 9px;font-size:12px;margin-bottom:10px}@media(max-width:780px){.grid{grid-template-columns:1fr}.wrap{padding-top:24px}.row{grid-template-columns:1fr}textarea{min-height:360px}}
 </style>
 </head>
 <body><main class="wrap">
 <header><span class="badge">FORTUNE PROMPT MAKER</span><h1>総合鑑定書 PromptMaker</h1><p>基本情報を入れるだけ。ChatGPT用の総合鑑定プロンプトを生成します。</p></header>
 <section class="grid">
 <div class="card"><h2>01｜基本情報</h2>
-<label>生年月日</label><input id="birth" type="text" inputmode="numeric" autocomplete="bday" placeholder="例：19870425 / 1987/04/25">
+<label>生年月日</label><div class="birth-row"><input id="birthY" type="text" inputmode="numeric" maxlength="4" placeholder="1987" aria-label="生年"><span class="birth-sep">-</span><input id="birthM" type="text" inputmode="numeric" maxlength="2" placeholder="04" aria-label="生月"><span class="birth-sep">-</span><input id="birthD" type="text" inputmode="numeric" maxlength="2" placeholder="25" aria-label="生日"></div>
 <label>出生地</label><input id="place" placeholder="例：福岡市">
 <div class="row"><div><label>出生時間</label><input id="time" type="time"></div><div><label>時間の確度</label><select id="certainty"><option>正確</option><option selected>おおよそ</option><option>不明</option></select></div></div>
 <label>血液型</label><select id="blood"><option>不明</option><option>A型</option><option>B型</option><option>O型</option><option>AB型</option></select>
@@ -20,7 +20,7 @@
 <label>鑑定書デザイン</label><select id="style"><option selected>深紺×金×象牙｜神秘的</option><option>和紙×墨×金｜和風</option><option>深紺×金｜魔法図書館</option><option>白×紺×金｜ミニマル</option></select>
 <div class="actions"><button class="primary" onclick="generate()">鑑定プロンプトを生成</button><button class="secondary" onclick="resetAll()">リセット</button></div>
 <p class="note">出生時間が不明・推定の場合は、ASCやハウス、時柱など時刻依存の項目を断定しないよう自動で指示します。フルネームは入力不要です。</p></div>
-<div class="card"><h2>03｜完成プロンプト</h2><textarea id="out" readonly placeholder="左側を入力して「鑑定プロンプトを生成」を押してください。"></textarea><div class="actions"><button class="primary" onclick="copyPrompt()">コピーする</button></div><p class="note" id="status">FIX 1.4｜19870425 の8桁入力に対応。</p></div>
+<div class="card"><h2>03｜完成プロンプト</h2><textarea id="out" readonly placeholder="左側を入力して「鑑定プロンプトを生成」を押してください。"></textarea><div class="actions"><button class="primary" onclick="copyPrompt()">コピーする</button></div><p class="note" id="status">生年月日は「年 - 月 - 日」の入力式です。</p></div>
 </section></main>
 <script>
 function parseBirthDate(value){
@@ -54,7 +54,10 @@ function calcLifePath(date){
  return {value:final.value, formula:`${fmt('月',month)} / ${fmt('日',day)} / ${fmt('年',year)} / 合算:${month.value}+${day.value}+${year.value}=${sum}→${final.history.slice(1).join('→')||sum}`};
 }
 function generate(){
- const birth=document.getElementById('birth').value||'未入力';
+ const by=document.getElementById('birthY').value.trim();
+ const bm=document.getElementById('birthM').value.trim();
+ const bd=document.getElementById('birthD').value.trim();
+ const birth=(by&&bm&&bd)?`${by}-${bm.padStart(2,'0')}-${bd.padStart(2,'0')}`:'未入力';
  const place=document.getElementById('place').value.trim()||'未入力';
  const certainty=document.getElementById('certainty').value;
  const rawTime=document.getElementById('time').value;
@@ -63,17 +66,13 @@ function generate(){
  const level=document.getElementById('level').value;
  const style=document.getElementById('style').value;
  const parsedBirth=parseBirthDate(birth);
- if(!parsedBirth){document.getElementById('status').textContent='生年月日を確認してください（例：19870425 / 1987/04/25）。';document.getElementById('out').value='';return;}
+ if(!parsedBirth){document.getElementById('status').textContent='生年月日を確認してください（年・月・日を数字で入力）。';document.getElementById('out').value='';return;}
  const life=calcLifePath(parsedBirth);
  const depth=level==='全部盛り'?'入力情報から算出可能な占術を可能な限り広く使用してください。':level==='しっかり'?'主要な占術を幅広く横断してください。':'主要な占術を中心に簡潔に鑑定してください。';
  const p=`以下の人物を総合鑑定してください。\n\n【基本情報】\n生年月日：${birth}\n出生地：${place}\n出生時間：${time}\n血液型：${blood}\n鑑定レベル：${level}\n\n${depth}\n西洋占星術、四柱推命、九星気学、数秘術、干支・五行、宿曜、タロットなど、入力情報から算出可能な占術を横断してください。\n\n【鑑定項目】\n本質・性格／才能・強み／適職・仕事運／金運／恋愛／人間関係／弱点・課題／人生テーマ／人生の転換期／現在の運勢／今後5年間の流れ\n\nこの鑑定では、このプロンプト内の【基本情報】だけを使用してください。これまでの会話・過去のやり取り・保存された記憶・プロフィール・以前に共有された個人情報や嗜好などは、鑑定内容に一切含めず、参照もしないでください。\n\n【計算精度ルール】\n鑑定を始める前に、各占術の計算方式を信頼できる資料で確認し、計算根拠を明示してください。記憶だけで暦・星・宿・干支を決めないでください。\n・西洋占星術：出生地・出生時刻・タイムゾーンを考慮し、天体位置は高精度エフェメリス等の信頼できる天文計算を優先する。出生時刻が不明・推定ならASC、MC、ハウス、月など時刻依存項目の確度を明記する。\n・四柱推命：西暦1月1日や旧暦元日ではなく節入りを確認し、年柱は立春、月柱は二十四節気の節を基準に判定する。日柱・時柱も暦計算を確認し、流派差がある場合は採用方式を書く。\n・九星気学：年の境界を1月1日ではなく立春で判定する。本命星・月命星は節入りを確認し、早見表だけで境界日を処理しない。\n・数秘術：ライフパスナンバーはPromptMaker側でも事前計算済み。基準値は【${life.value}】、検算式は【${life.formula}】。月・日・年をそれぞれ単独で還元し、11・22・33は途中で保持してから3要素を合算し、最後に再還元する。この基準値とAI側の計算が一致しない場合は、鑑定を進めず再計算する。「ライフナンバー」と表記する場合も、このライフパス値と混同しない。\n・宿曜：27宿か28宿かを明記する。27宿を使う場合は、新暦→日本の旧暦への換算と月ごとの朔日宿を確認して算出する。恒星黄経方式など別方式を使う場合は方式の違いを明記する。\n・干支・五行：年だけでなく、算出可能なら年柱・月柱・日柱・時柱それぞれの干支と五行を区別する。\n・タロット：生年月日対応カードを出す場合は、使用した数秘還元ルールを明記する。ランダムドローと生年月日対応カードを混同しない。\n・血液型：性格・運勢との科学的関連は確立していないため、使う場合は日本の血液型占い文化として明確に分離する。\n・複数の計算法や流派で結果が変わる項目は、一つを正解と断定せず「採用方式」と「別方式では変わる可能性」を表示する。\n・重要な算出結果は可能なら2つ以上の独立した資料または計算方法でクロスチェックする。食い違った場合は一致するまで再確認し、解消できなければ不確定として出力する。\n・最終鑑定の前に「計算チェック」欄を作り、主要な算出値と採用方式を簡潔に列挙する。\n\n単独の占術だけで判断せず、複数の占術で共通して現れる特徴を特に重視してください。占い上の解釈と確認可能な事実を混同しないでください。出生時間など不確定な情報に依存する結果は「推定」「確定できない」と明記し、計算できない項目を推測で補完しないでください。\n\n鑑定後、その結果を1枚の「総合鑑定書」として画像生成してください。\n\n【画像仕様】\n・PCフルスクリーン向け16:9横長\n・デザイン：${style}\n・上質な日本語インフォグラフィック\n・情報量は多めだがセクションを明確に整理\n・上段：人生テーマ・主要な鑑定結果\n・中段：各占術の分析\n・下段：性格・才能・仕事・金運・恋愛・課題\n・最下段：現在〜5年間の運勢\n\n【画像生成時のプライバシールール】\n・鑑定計算に使用した個人情報を画像内にそのまま掲載しない\n・氏名、フルネーム、生年月日の具体的な年月日、出生時間、出生地の詳細など、個人を特定できる入力情報は表示しない\n・画像には鑑定結果を中心に掲載する\n・星座、九星、数秘、干支、宿など、鑑定によって導出された結果は表示してよい\n・タイトルは「総合鑑定書」とし、個人名をタイトルに使用しない\n・画像生成用の指示・プロンプトには、鑑定に不要となった具体的な生年月日、出生時間、出生地、氏名などの個人情報を引き継がない\n・文字化けや意味不明な日本語を避け、読みやすさを優先する`;
  document.getElementById('out').value=p;
  document.getElementById('status').textContent='生成しました。下の「コピーする」から使えます。';
 }
-window.addEventListener('DOMContentLoaded',()=>{
- const btn=document.querySelector('button.primary[onclick="generate()"]');
- if(btn){btn.onclick=generate;}
-});
 async function copyPrompt(){const t=document.getElementById('out');if(!t.value)return;try{await navigator.clipboard.writeText(t.value);document.getElementById('status').textContent='コピーしました。ChatGPTに貼り付けて使えます。'}catch(e){t.select();document.execCommand('copy');}}
 function resetAll(){document.querySelectorAll('input').forEach(x=>x.value='');document.getElementById('blood').selectedIndex=0;document.getElementById('certainty').selectedIndex=1;document.getElementById('level').selectedIndex=1;document.getElementById('style').selectedIndex=0;document.getElementById('out').value='';}
 </script></body></html>
